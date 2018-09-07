@@ -13,7 +13,7 @@ inputs = [''.join(triplet) for triplet in triplets]
 input_s = "\n".join(inputs)
 
 # Send the input codes to the instrumentation process
-p = subprocess.Popen(["./goop"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+p = subprocess.Popen(["./dec_wrapper"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 outputs = p.communicate(input_s)[0].splitlines()[2:]
 
 # Create mapping from output (in hex, skipping first character,
