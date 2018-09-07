@@ -144,38 +144,38 @@ asm.bits 64
 = attach 23017 23017
 23017
  -- [Some banal r2 quip]
+```
 
-[0x7ffff7dd5ea0]> dcu 0x5555555550d4
-Continue until 0x5555555550d4 using 1 bpsize
-hit breakpoint at: 5555555550d4
-           0x5555555550c3      e828f6ffff     call sym.imp.strncpy    ;[4]   ; char *strncpy(char *dest, const char *src, size_t  n)                                                                               
-|           0x5555555550c8      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
-|           0x5555555550cc      4889c7         mov rdi, rax                                                                                                                                                         
-|           0x5555555550cf      e88cf7ffff     call sub.strlen_860     ;[5]                                                                                                                                         
-|           0x5555555550d4      488945f8       mov qword [local_8h], rax                                                                                                                                            
-|           0x5555555550d8      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
-|           0x5555555550dc      4889c7         mov rdi, rax                                                                                                                                                         
-|           0x5555555550df      e875feffff     call sub.strlen_f59     ;[6]                                                                                                                                         
-|           0x5555555550e4      488945f8       mov qword [local_8h], rax                                                                                                                                            
-|           0x5555555550e8      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
-|           0x5555555550ec      4889c7         mov rdi, rax                                                                                                                                                         
-|           0x5555555550ef      e8f3faffff     call sub.strlen_be7     ;[7]                                                                                                                                         
-|           0x5555555550f4      488945f8       mov qword [local_8h], rax                                                                                                                                            
-|           0x5555555550f8      488b15110f20.  mov rdx, qword [0x555555756010]       ; [0x555555756010:8]=0x5555555551c8 str.25_Q44E233___E_M34____LS5VEQ45_M2S___7___3T                                            
-|           0x5555555550ff      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
-|           0x555555555103      4889d6         mov rsi, rdx                                                                                                                                                         
-|           0x555555555106      4889c7         mov rdi, rax                                                                                                                                                         
-|           0x555555555109      e802f6ffff     call sym.imp.strcmp     ;[8]   ; int strcmp(const char *s1, const char *s2)                                                                                          
-|           0x55555555510e      85c0           test eax, eax                                                                                                                                                        
-|       ,=< 0x555555555110      750e           jne 0x555555555120      ;[9]                                                                                                                                         
-|       |   0x555555555112      488d3d020100.  lea rdi, str.correct__:       ; 0x55555555521b ; "correct  :)"                                                                                                       
-|       |   0x555555555119      e8daf5ffff     call sym.imp.puts       ;[?]    ; int puts(const char *s)                                                                                                            
-|      ,==< 0x55555555511e      eb0c           jmp 0x55555555512c      ;[?]                                                                                                                                         
-|      |`-> 0x555555555120      488d3d000100.  lea rdi, str.incorrect_:       ; 0x555555555227 ; "incorrect :("                                                                                                     
-|      |    0x555555555127      e8ccf5ffff     call sym.imp.puts       ;[?]    ; int puts(const char *s)                                                                                                            
-|      `--> 0x55555555512c      b800000000     mov eax, 0                                                                                                                                                           
-|           0x555555555131      c9             leave                                                                                                                                                                
-\           0x555555555132      c3             ret                                                                                                                                                                  
+Viewing the encoding functions being called from main:
+```asm
+0x5555555550c3      e828f6ffff     call sym.imp.strncpy    ;[4]   ; char *strncpy(char *dest, const char *src, size_t  n)                                                                               
+0x5555555550c8      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
+0x5555555550cc      4889c7         mov rdi, rax                                                                                                                                                         
+0x5555555550cf      e88cf7ffff     call sub.strlen_860     ;[5]                                                                                                                                         
+0x5555555550d4      488945f8       mov qword [local_8h], rax                                                                                                                                            
+0x5555555550d8      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
+0x5555555550dc      4889c7         mov rdi, rax                                                                                                                                                         
+0x5555555550df      e875feffff     call sub.strlen_f59     ;[6]                                                                                                                                         
+0x5555555550e4      488945f8       mov qword [local_8h], rax                                                                                                                                            
+0x5555555550e8      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
+0x5555555550ec      4889c7         mov rdi, rax                                                                                                                                                         
+0x5555555550ef      e8f3faffff     call sub.strlen_be7     ;[7]                                                                                                                                         
+0x5555555550f4      488945f8       mov qword [local_8h], rax                                                                                                                                            
+0x5555555550f8      488b15110f20.  mov rdx, qword [0x555555756010]       ; [0x555555756010:8]=0x5555555551c8 str.25_Q44E233___E_M34____LS5VEQ45_M2S___7___3T                                            
+0x5555555550ff      488b45f8       mov rax, qword [local_8h]                                                                                                                                            
+0x555555555103      4889d6         mov rsi, rdx                                                                                                                                                         
+0x555555555106      4889c7         mov rdi, rax                                                                                                                                                         
+0x555555555109      e802f6ffff     call sym.imp.strcmp     ;[8]   ; int strcmp(const char *s1, const char *s2)                                                                                          
+0x55555555510e      85c0           test eax, eax                                                                                                                                                        
+0x555555555110      750e           jne 0x555555555120      ;[9]                                                                                                                                         
+0x555555555112      488d3d020100.  lea rdi, str.correct__:       ; 0x55555555521b ; "correct  :)"                                                                                                       
+0x555555555119      e8daf5ffff     call sym.imp.puts       ;[?]    ; int puts(const char *s)                                                                                                            
+0x55555555511e      eb0c           jmp 0x55555555512c      ;[?]                                                                                                                                         
+0x555555555120      488d3d000100.  lea rdi, str.incorrect_:       ; 0x555555555227 ; "incorrect :("                                                                                                     
+0x555555555127      e8ccf5ffff     call sym.imp.puts       ;[?]    ; int puts(const char *s)                                                                                                            
+0x55555555512c      b800000000     mov eax, 0                                                                                                                                                           
+0x555555555131      c9             leave                                                                                                                                                                
+0x555555555132      c3             ret                                                                                                                                                                  
 
 ```
 
@@ -192,6 +192,9 @@ vaddr=0x55555555504a paddr=0x0000104a
 Now we can continue until after each of the encoding functions to see how our input has been changed:
 
 ```asm
+:> dcu 0x5555555550d4
+Continue until 0x5555555550d4 using 1 bpsize
+hit breakpoint at: 5555555550d4
 :> px 48 @ rax
 - offset -       0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
 0x555555757280  5155 4642 5155 4642 5151 3d3d 0000 0000  QUFBQUFBQQ==....
