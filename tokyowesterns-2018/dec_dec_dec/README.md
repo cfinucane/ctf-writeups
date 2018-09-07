@@ -182,7 +182,7 @@ Now we can continue until after each of the encoding functions to see how our in
 ```
 
 `rax` will hold the return value of the function. So the output of the first encoding function is `QUFBQUFBQQ==`
-That string looks familiar! Kinda like a base64...
+That string looks familiar! Kinda like base64...
 
 
 ```python
@@ -215,7 +215,7 @@ Note that you can also see the creation of a table of base64 characters in `sub.
 0x000008ed      488945e8       mov qword [local_18h], rax
 ```
 
-Onto the next one:
+On to the next one:
 
 ```asm
 :> dcu 0x5555555550e4
@@ -235,7 +235,6 @@ Again, this encoding looks familiar. It maps equal length strings, doesn't affec
 
 ```python
 $ python
->>> from base64 import b64encode
 >>> ord('Q') - ord('D')
 13
 >>> ord('U') - ord('H')
@@ -262,7 +261,7 @@ hit breakpoint at: 5555555550f4
 0x5555557572d0  5d00 0000 0000 0000 310d 0200 0000 0000  ].......1.......
 ```
 
-This encoding is clearly trickier. It looks like it's mapping 12 bytes to 33 bytes? 🤷‍♀️
+This encoding is clearly trickier. It looks like it's mapping 12 bytes to 17 bytes? 🤷‍♀️
 There's clearly some pattern/repetition, but figuring it out isn't going to be as easy as the previous two.
 
 ## Mapping the mystery encoding function
