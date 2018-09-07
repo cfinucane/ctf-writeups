@@ -127,12 +127,12 @@ Looking at the disassembly of each of the mystery functions, it's unclear what e
 
 ![Control flow graph of function strlen_be7](images/strlen_be7.png "Control flow graph of function strlen_be7")
 
-Yikes! That's a lot to try to reverse. Let's see what we can do to avoid that kind of manual approach...
+Yikes! That's a lot to try to reverse, and that's only what fits on-screen. Let's see what we can do to avoid that kind of manual approach...
 
 ## Characterizing the encoding functions
 
 For `sub.strlen_860` and `sub.strlen_f59`, we tried some test inputs in radare2.
-We turn off ASLR for reproducability, and pass in something for arg1 to ensure that the program allocates a reasonably-sized buffer. (TODO)
+We turn off ASLR for reproducibility (so that things don't move around in memory each time we run the program), and pass in some non-empty value for `arg1` to ensure that the program allocates a reasonably-sized buffer for us to poke at.
 
 ```asm
 $ r2 -A -d -Raslr=no -Rarg1=AAAAAAA dec_dec_dec-c55c231bfbf686ab058bac2a56ce6cc49ae32fe086af499571e335c9f7417e5b
