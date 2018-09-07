@@ -119,13 +119,13 @@ It looks like it:
 * `strncpy`s the argument into the `malloc`d buffer
 * calls three mysterious functions, passing `local_8h` to each of them and then storing the result back into `local_8h`. Those functions are: `strlen_860`, `strlen_f59`, and `strlen_be7`
 * compares the output of the last mysterious function call to the `str.25_Q44E233___E_M34____LS5VEQ45_M2S___7___3T` string
-* prints "correct  :)" if they match and "incorrect :(" if they do not
+* prints `correct  :)` if they match and `incorrect :(` if they do not
 
 That would seem to suggest that the correct flag is the one which transforms, after being passed through `strlen_860`, `strlen_f59`, and `strlen_be7`, into the `str.25_Q44E233___E_M34____LS5VEQ45_M2S___7___3T` string.
 
 Looking at the disassembly of each of the mystery functions, it's unclear what exactly they do. The first two might be manageable to dissect and reverse, but the last one looks particularly challenging:
 
-![Control flow graph of function strlen_be7](/images/strlen_be7.png "Control flow graph of function strlen_be7")
+![Control flow graph of function strlen_be7](images/strlen_be7.png "Control flow graph of function strlen_be7")
 
 Yikes! That's a lot to try to reverse. Let's see what we can do to avoid that kind of manual approach...
 
