@@ -383,3 +383,5 @@ Having grabbed this string, in [decode.py](decode.py) we successively invert the
 This gives us, at last, the flag: `TWCTF{base64_rot13_uu}` 🎉🎉🎉
 
 (Oh, it was [uuencoding](https://en.wikipedia.org/wiki/Uuencoding)... 💡)
+
+— @max-b and @cfinucane
