@@ -36,6 +36,8 @@ OK, looks like a 64-bit x86 binary with position-independent code.
 
 ## Analysis of `main`
 
+Firing up r2 with `-A` for analysis, we can look at the main function:
+
 ```asm
 $ r2 -A dec_dec_dec-c55c231bfbf686ab058bac2a56ce6cc49ae32fe086af499571e335c9f7417e5b
 > pdf @ main
@@ -110,6 +112,22 @@ $ r2 -A dec_dec_dec-c55c231bfbf686ab058bac2a56ce6cc49ae32fe086af499571e335c9f741
 |           0x00001131      c9             leave
 \           0x00001132      c3             ret
 ```
+
+It looks like it:
+* checks that it has been given two arguments (one will be the name of the binary, the other should be our flag guess) and exits otherwise
+* `malloc`s a size equal to the argument string length + 1
+* `strncpy`s the argument into the `malloc`d buffer
+* calls three mysterious functions, passing `local_8h` to each of them and then storing the result back into `local_8h`. Those functions are: `strlen_860`, `strlen_f59`, and `strlen_be7`
+* compares the output of the last mysterious function call to the `str.25_Q44E233___E_M34____LS5VEQ45_M2S___7___3T` string
+* prints "correct  :)" if they match and "incorrect :(" if they do not
+
+That would seem to suggest that the correct flag is the one which transforms, after being passed through `strlen_860`, `strlen_f59`, and `strlen_be7`, into the `str.25_Q44E233___E_M34____LS5VEQ45_M2S___7___3T` string.
+
+Looking at the disassembly of each of the mystery functions, it's unclear what exactly they do. The first two might be manageable to dissect and reverse, but the last one looks particularly challenging:
+
+![Control flow graph of function strlen_be7](/images/strlen_be7.png "Control flow graph of function strlen_be7")
+
+Yikes! That's a lot to try to reverse. Let's see what we can do to avoid that kind of manual approach...
 
 ## Characterizing the encoding functions
 
