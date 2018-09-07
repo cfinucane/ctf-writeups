@@ -18,7 +18,7 @@ $ ./dec_dec_dec-c55c231bfbf686ab058bac2a56ce6cc49ae32fe086af499571e335c9f7417e5b
 Looks like it wants the flag passed as an argument.
 
 ```sh
-$ $ ./dec_dec_dec-c55c231bfbf686ab058bac2a56ce6cc49ae32fe086af499571e335c9f7417e5b definitely_the_flag
+$ ./dec_dec_dec-c55c231bfbf686ab058bac2a56ce6cc49ae32fe086af499571e335c9f7417e5b definitely_the_flag
 incorrect :(
 ```
 
