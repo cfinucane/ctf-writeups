@@ -357,6 +357,8 @@ Let's look closer at the string constant that our triple-encoded input is being 
 @25-Q44E233=,>E-M34=,,$LS5VEQ45)M2S-),7-$/3T
 ```
 
-Having grabbed this string, in [decode.py](decode.py) we successively invert the three encodings to get the flag: `TWCTF{base64_rot13_uu}` 🎉🎉🎉
+Having grabbed this string, in [decode.py](decode.py) we successively invert the three encodings.  Note that for the first stage of decoding, we skip the initial `@` in the string, due to our earlier observation that the first character is irrelevant (it turns out it's `len(decoded_str)+0x20`).  
 
-(Oh, it was uuencoding... 💡)
+This gives us, at last, the flag: `TWCTF{base64_rot13_uu}` 🎉🎉🎉
+
+(Oh, it was [uuencoding](https://en.wikipedia.org/wiki/Uuencoding)... 💡)
